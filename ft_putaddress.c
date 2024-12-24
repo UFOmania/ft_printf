@@ -5,49 +5,34 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 16:53:20 by massrayb          #+#    #+#             */
-/*   Updated: 2024/12/12 10:16:54 by massrayb         ###   ########.fr       */
+/*   Created: 2024/12/18 16:52:00 by massrayb          #+#    #+#             */
+/*   Updated: 2024/12/19 17:55:29 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	clear_address(char buff[15])
+int	ft_putaddress(unsigned long ptr)
 {
-	int	i;
-	int	j;
+	char	*hex_set;
+	char	address[32];
+	int		i;
+	int		return_val;
 
-	i = 2;
-	j = 2;
-	while (buff[i] == '0')
-		i++;
-	while (i < 14 && buff[i])
-		buff[j++] = buff[i++];
-	while (j < 14)
-		buff[j++] = 0;
-}
-
-int	ft_putaddress(void *ptr)
-{
-	unsigned long	address;
-	int				index;
-	char			buff[15];
-	char			*hex_base;
-
-	hex_base = "0123456789abcdef";
-	address = (unsigned long)ptr;
-	index = 13;
-	if (!ptr)
+	i = 0;
+	hex_set = "0123456789abcdef";
+	if (ptr == 0)
 		return (ft_putstr("0x0"));
-	buff[0] = '0';
-	buff[1] = 'x';
-	buff[14] = '\0';
-	while (index > 1)
+	else
+		ft_putstr("0x");
+	while (ptr > 0)
 	{
-		buff[index] = hex_base[(address % 16)];
-		address /= 16;
-		index--;
+		address[i] = hex_set[ptr % 16];
+		ptr /= 16;
+		i++;
 	}
-	clear_address(buff);
-	return (ft_putstr(buff));
+	return_val = i + 2;
+	while (--i >= 0)
+		ft_putchar(address[i]);
+	return (return_val);
 }

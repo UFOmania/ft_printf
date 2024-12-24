@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: massrayb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 16:50:34 by massrayb          #+#    #+#             */
-/*   Updated: 2024/12/12 10:02:59 by massrayb         ###   ########.fr       */
+/*   Created: 2024/12/18 16:38:31 by massrayb          #+#    #+#             */
+/*   Updated: 2024/12/19 08:02:47 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,11 @@
 
 int	ft_putstr(char *str)
 {
-	int		i;
-	char	*null;
+	int	i;
 
-	null = malloc(7);
-	if (!null)
-		return (0);
-	null = "(null)";
 	i = 0;
-	if (!str)
-		str = null;
+	if (str == NULL)
+		return (ft_putstr("(null)"));
 	while (str[i])
 	{
 		ft_putchar(str[i]);
